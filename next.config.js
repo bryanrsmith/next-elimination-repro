@@ -1,14 +1,5 @@
-const {
-  WebpackBundleSizeAnalyzerPlugin,
-} = require('webpack-bundle-size-analyzer')
-const { ANALYZE } = process.env
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+	enabled: !!process.env.ANALYZE,
+});
 
-module.exports = {
-  webpack: function(config) {
-    if (ANALYZE) {
-      config.plugins.push(new WebpackBundleSizeAnalyzerPlugin('stats.txt'))
-    }
-
-    return config
-  },
-}
+module.exports = withBundleAnalyzer({})
